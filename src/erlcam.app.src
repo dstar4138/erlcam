@@ -1,0 +1,28 @@
+{application, erlcam,
+    [
+        {description, "Erlang V4L2 Port Library"},
+        {vsn,"0.1"},
+        {applications, []},
+        {registered, [erlcam]},
+        {mod, {erlcam_app, []}},
+        {env, [
+        
+            %% The full device path of a Video Device for v4l2.
+            {device, "/dev/video0"},
+
+            %% A supported width of the device.
+            {width, "780"},
+
+            %% A supported height of the device.
+            {height, "480"},
+
+            %% Field: none, interlaced, top, or bottom. 
+            %% http://linuxtv.org/downloads/v4l-dvb-apis/field-order.html
+            {field, "none"},
+            
+            %% Format: mjpeg, argb32, yuyv, grey
+            %% http://linuxtv.org/downloads/v4l-dvb-apis/pixfmt.html
+            {format, "mjpeg"}
+        ]}
+    ]
+}.

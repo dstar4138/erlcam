@@ -1,0 +1,5 @@
+c_src/*.d
+c_src/*.o
+priv
+ebin
+.rebar

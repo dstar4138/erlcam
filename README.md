@@ -23,6 +23,7 @@ The Erlang port wraps this and can request frames as Erlang binaries.
 > erlcam:start().
 > {ok, Binary} = erlcam:get_frame( Port ).
 > ok = file:write_file( "test.jpg", Binary ).
+> erlcam:stop().
 ```
 
 Additionally, you can set erlcam up as a streaming service via a pub/sub style
@@ -34,7 +35,9 @@ mechanims:
 > ok = pg2:join( GroupName, self() ).
 > erlcam:start().
 > erlcam:add_group( GroupName, 1000 * 60 ). 
-> F = fun() -> receive {erlcam, binary, Binary} -> save( Binary ) end end.
+> FileName = fun() -> io_lib:format("~p.jpg",[erlang:unique_integer([positive])]) end.
+> Save = fun(Bin) -> file:write_file(FileName(),Bin) end.
+> F = fun This() -> receive {erlcam, frame, Bin} -> Save(Bin), This() end end.
 > F().
 ```
 

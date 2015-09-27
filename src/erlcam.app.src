@@ -11,10 +11,10 @@
             {device, "/dev/video0"},
 
             %% A supported width of the device.
-            {width, "780"},
+            {width, "1280"},
 
             %% A supported height of the device.
-            {height, "480"},
+            {height, "780"},
 
             %% Field: none, interlaced, top, or bottom. 
             %% http://linuxtv.org/downloads/v4l-dvb-apis/field-order.html

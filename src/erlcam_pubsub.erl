@@ -155,7 +155,7 @@ trigger_proc( GroupName, Timeout ) ->
             lists:foreach( fun(P) -> P!{erlcam, shutdown, Reason} end,
                            pg2:get_members( GroupName ) )
     after Timeout ->
-        error_logger:info_msg("trigger_prod:~p:~p:Sending new binary~n",[GroupName, Timeout]),
+%        error_logger:info_msg("trigger_prod:~p:~p:Sending new binary~n",[GroupName, Timeout]),
         process_frame( GroupName ),
         trigger_proc( GroupName, Timeout )
     end.
@@ -169,5 +169,5 @@ process_frame( GroupName ) ->
     lists:foreach( fun(P) -> ping( Frame, P ) end, 
                    pg2:get_members(GroupName) ).
 ping( Frame, Pid ) ->
-    error_logger:info_msg("ping:sending frame to pid(~p)~n",[Pid]),
-    Pid ! {erlcam_frame, Frame}.
+%    error_logger:info_msg("ping:sending frame to pid(~p)~n",[Pid]),
+    Pid ! {erlcam, frame, Frame}.
